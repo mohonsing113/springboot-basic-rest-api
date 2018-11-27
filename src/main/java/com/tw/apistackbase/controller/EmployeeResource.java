@@ -17,29 +17,34 @@ public class EmployeeResource {
 
     private final Logger log = Logger.getLogger(this.getClass().getName());
 
-    EmployeeService employeeService;
+    EmployeeResource employeeResource;
+    CompanyResource companyResource;
+
     public EmployeeResource() {
-        employeeService = new EmployeeService();
+        companyResource = new CompanyResource();
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Employee> list(){
-        return employeeService.list();
+    public List<Employee> list(@PathVariable int id) {
+        return loadEmployeeService(id).list();
     }
 
-    @RequestMapping(value = "create", method = RequestMethod.POST)
-    public Employee create(@RequestBody Employee employee){
-        return employeeService.create(employee);
+    @RequestMapping(method = RequestMethod.POST)
+    public Employee create(@PathVariable int id, @RequestBody Employee employee) {
+        return loadEmployeeService(id).create(employee);
     }
 
-    @RequestMapping(value = "update/{id}", method = RequestMethod.PUT)
-    public Employee update(@PathVariable int id, @RequestBody Employee employee){
-        return employeeService.update(id, employee);
+    @RequestMapping(value = "/{eid}", method = RequestMethod.PUT)
+    public Employee update(@PathVariable int id,@PathVariable int eid, @RequestBody Employee employee) {
+        return loadEmployeeService(id).update(eid, employee);
     }
 
-    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
-    public Employee delete(@PathVariable int id){
-        return employeeService.delete(id);
+    @RequestMapping(value = "/{eid}", method = RequestMethod.DELETE)
+    public Employee delete(@PathVariable int id,@PathVariable int eid) {
+        return loadEmployeeService(id).delete(eid);
     }
 
+    public EmployeeService loadEmployeeService(int id) {
+        return new EmployeeService(companyResource.getCompanyById(id).getEmployees());
+    }
 }

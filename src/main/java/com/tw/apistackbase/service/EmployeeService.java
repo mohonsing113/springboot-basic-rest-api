@@ -9,13 +9,15 @@ public class EmployeeService {
     private Map<Integer, Employee> employees = new HashMap<Integer, Employee>();
     static int currentId=4;
 
-    public EmployeeService() {
-        employees.put(0, new Employee(0, "Xiaoming", 20, "Male", 5000));
-        employees.put(1, new Employee(1, "Xiaohong", 19, "Female", 3000));
-        employees.put(2, new Employee(2, "Xiaozhi", 15, "Male", 2500));
-        employees.put(3, new Employee(3, "Xiaogang", 16, "Male", 5200));
-        employees.put(4, new Employee(4, "Xiaoxia", 15, "Female", 3523));
+    public EmployeeService(List<Employee> employees) {
+        employees.stream().forEach( employee -> this.employees.put(employee.getId(), employee));
+//        employees.put(0, new Employee(0, "Xiaoming", 20, "Male", 5000));
+//        employees.put(1, new Employee(1, "Xiaohong", 19, "Female", 3000));
+//        employees.put(2, new Employee(2, "Xiaozhi", 15, "Male", 2500));
+//        employees.put(3, new Employee(3, "Xiaogang", 16, "Male", 5200));
+//        employees.put(4, new Employee(4, "Xiaoxia", 15, "Female", 3523));
     }
+
 
     public List<Employee> list(){
         return new ArrayList<Employee>(employees.values());
