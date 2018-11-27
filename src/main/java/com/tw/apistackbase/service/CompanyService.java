@@ -27,4 +27,21 @@ public class CompanyService {
     public Company getCompanyById(int id) {
         return companys.get(id);
     }
+
+
+    public Company create(Company company) {
+        currentId+=1;
+        company.setId(currentId);
+        companys.put(currentId, company);
+        return company;
+    }
+
+    public Company update(int id, Company company) {
+        companys.put(id, company);
+        return company;
+    }
+
+    public Company delete(int id) {
+        return companys.remove(id);
+    }
 }

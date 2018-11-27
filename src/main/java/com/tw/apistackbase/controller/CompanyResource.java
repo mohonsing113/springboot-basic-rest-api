@@ -1,10 +1,7 @@
 package com.tw.apistackbase.controller;
 
 import com.tw.apistackbase.model.Company;
-import com.tw.apistackbase.model.Employee;
 import com.tw.apistackbase.service.CompanyService;
-import com.tw.apistackbase.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +24,21 @@ public class CompanyResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Company getCompanyById(@PathVariable int id){ return companyService.getCompanyById(id); }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Company create(@RequestBody Company company){
+        return companyService.create(company);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Company update(@PathVariable int id, @RequestBody Company company){
+        return companyService.update(id, company);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public Company delete(@PathVariable int id){
+        return companyService.delete(id);
+    }
 
 
 }
