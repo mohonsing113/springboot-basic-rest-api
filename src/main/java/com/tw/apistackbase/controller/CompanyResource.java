@@ -11,23 +11,22 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/company")
+@RequestMapping("/companies")
 public class CompanyResource {
 
     private final Logger log = Logger.getLogger(this.getClass().getName());
 
     CompanyService companyService;
 
-    @Autowired
-    public CompanyService getCompanyService() {
-        return companyService;
-    }
-
-    public void setCompanyService(CompanyService companyService) {
-        this.companyService = companyService;
+    public CompanyResource() {
+        this.companyService = new CompanyService();
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Company> list(){ return new CompanyService().list(); }
+    public List<Company> list(){ return companyService.list(); }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Company getCompanyById(@PathVariable int id){ return companyService.getCompanyById(id); }
+
 
 }

@@ -12,29 +12,34 @@ import java.util.*;
 import java.util.logging.*;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("companies/{id}/employees")
 public class EmployeeResource {
 
     private final Logger log = Logger.getLogger(this.getClass().getName());
 
+    EmployeeService employeeService;
+    public EmployeeResource() {
+        employeeService = new EmployeeService();
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public List<Employee> list(){
-        return EmployeeService.list();
+        return employeeService.list();
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public Employee create(@RequestBody Employee employee){
-        return EmployeeService.create(employee);
+        return employeeService.create(employee);
     }
 
     @RequestMapping(value = "update/{id}", method = RequestMethod.PUT)
     public Employee update(@PathVariable int id, @RequestBody Employee employee){
-        return EmployeeService.update(id, employee);
+        return employeeService.update(id, employee);
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
     public Employee delete(@PathVariable int id){
-        return EmployeeService.delete(id);
+        return employeeService.delete(id);
     }
 
 }
