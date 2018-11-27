@@ -3,6 +3,7 @@ package com.tw.apistackbase.service;
 import com.tw.apistackbase.model.Employee;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class EmployeeService {
 
@@ -37,5 +38,9 @@ public class EmployeeService {
 
     public Employee delete(int id) {
         return employees.remove(id);
+    }
+
+    public List<Employee> listGender(String gender) {
+        return list().stream().filter(s -> s.getGender().equalsIgnoreCase(gender)).collect(Collectors.toList());
     }
 }
