@@ -1,10 +1,10 @@
 package com.tw.apistackbase.service;
 
-import com.tw.apistackbase.model.Company;
-import com.tw.apistackbase.model.Employee;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class CompanyService {
 
     private Map<Integer, Company> companys = new HashMap<Integer, Company>();

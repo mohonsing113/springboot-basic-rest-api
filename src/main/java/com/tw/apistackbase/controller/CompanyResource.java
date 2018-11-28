@@ -1,7 +1,9 @@
 package com.tw.apistackbase.controller;
 
-import com.tw.apistackbase.model.Company;
+import com.tw.apistackbase.service.Company;
 import com.tw.apistackbase.service.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,29 +17,30 @@ public class CompanyResource {
 
     CompanyService companyService;
 
-    public CompanyResource() {
-        this.companyService = new CompanyService();
+    @Autowired
+    public CompanyResource(CompanyService companyService) {
+        this.companyService = companyService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Company> list(){ return companyService.list(); }
+    public ResponseEntity<List<Company>> list(){ return ResponseEntity.ok(companyService.list()); }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Company getCompanyById(@PathVariable int id){ return companyService.getCompanyById(id); }
+    public ResponseEntity<Company> getCompanyById(@PathVariable int id){ return ResponseEntity.ok(companyService.getCompanyById(id)); }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Company create(@RequestBody Company company){
-        return companyService.create(company);
+    public ResponseEntity<Company> create(@RequestBody Company company){
+        return ResponseEntity.ok(companyService.create(company));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Company update(@PathVariable int id, @RequestBody Company company){
-        return companyService.update(id, company);
+    public ResponseEntity<Company> update(@PathVariable int id, @RequestBody Company company){
+        return ResponseEntity.ok(companyService.update(id, company));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public Company delete(@PathVariable int id){
-        return companyService.delete(id);
+    public ResponseEntity<Company> delete(@PathVariable int id){
+        return ResponseEntity.ok(companyService.delete(id));
     }
 
 

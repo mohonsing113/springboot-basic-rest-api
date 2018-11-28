@@ -1,4 +1,4 @@
-package com.tw.apistackbase.model;
+package com.tw.apistackbase.service;
 
 import java.util.List;
 
@@ -6,6 +6,9 @@ public class Company {
     private int id;
     private String companyName;
     private List<Employee> employees;
+
+    public Company() {
+    }
 
     public Company(int id, String companyName, List<Employee> employees) {
         this.id = id;

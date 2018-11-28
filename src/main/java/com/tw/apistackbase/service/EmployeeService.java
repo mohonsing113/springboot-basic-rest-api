@@ -1,6 +1,6 @@
 package com.tw.apistackbase.service;
 
-import com.tw.apistackbase.model.Employee;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -42,5 +42,17 @@ public class EmployeeService {
 
     public List<Employee> listGender(String gender) {
         return list().stream().filter(s -> s.getGender().equalsIgnoreCase(gender)).collect(Collectors.toList());
+    }
+
+    public List<Employee> getPage(Integer pageIndex, Integer pageSize) {
+        List<Employee> pagedEmployees = list();
+        int startIndex = (pageIndex - 1) * pageSize;
+        int endIndex = pageIndex * pageSize;
+
+        if (pagedEmployees.size() < endIndex) {
+            return new ArrayList<>();
+        }
+
+        return pagedEmployees.subList(startIndex, endIndex);
     }
 }

@@ -1,4 +1,4 @@
-package com.tw.apistackbase.model;
+package com.tw.apistackbase.service;
 
 public class Employee {
     private int id;
@@ -7,6 +7,8 @@ public class Employee {
     private String gender;
     private double salary;
 
+    public Employee() {
+    }
 
     public Employee(int id, String name, int age, String gender, double salary) {
         this.id = id;
